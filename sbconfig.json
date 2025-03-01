@@ -1,0 +1,969 @@
+{
+    "log": {
+        "disabled": false,
+        "level": "info",
+        "output": "box.log",
+        "timestamp": true
+    },
+    "dns": {
+        "servers": [
+            {
+                "tag": "google",
+                "address": "tls://8.8.8.8",
+                "address_strategy": "ipv4_only",
+                "detour": "节点选择"
+            },
+            {
+                "tag": "alidns",
+                "address": "223.5.5.5",
+                "address_strategy": "ipv4_only",
+                "detour": "direct"
+            },
+            {
+                "tag": "block",
+                "address": "rcode://success"
+            }
+        ],
+        "rules": [
+            {
+                "outbound": "any",
+                "server": "alidns",
+                "disable_cache": true
+            },
+            {
+                "rule_set": "geosite-category-ads-all",
+                "server": "block"
+            },
+            {
+                "rule_set": "geoip-cn",
+                "action": "route",
+                "server": "alidns"
+            },
+            {
+                "rule_set": [
+                    "geosite-gfw"
+                ],
+                "server": "google"
+            }
+        ],
+        "final": "google",
+        "strategy": "ipv4_only"
+    },
+    "inbounds": [
+        {
+            "type": "tun",
+            "tag": "tun-in",
+            "address": "172.19.0.1/30",
+            "auto_route": true,
+            "strict_route": true,
+            "stack": "system",
+            "platform": {
+                "http_proxy": {
+                    "enabled": true,
+                    "server": "127.0.0.1",
+                    "server_port": 2080
+                }
+            }
+        },
+        {
+            "type": "mixed",
+            "listen": "127.0.0.1",
+            "listen_port": 2080,
+            "sniff": true,
+            "users": []
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "direct",
+            "tag": "direct"
+        },
+        {
+            "type": "vmess",
+            "tag": "香港1",
+            "server": "hk01.653ebeeb-5f60-4be5-958d-7bf4839cdccd.ef6616fd-5b06-482f-9d64-183745659cbf.byteprivatelink.com",
+            "server_port": 443,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "transport": {
+                "type": "grpc",
+                "service_name": "12306"
+            },
+            "tls": {
+                "enabled": true,
+                "server_name": "www.12306.cn",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "香港2",
+            "server": "hk02.653ebeeb-5f60-4be5-958d-7bf4839cdccd.ef6616fd-5b06-482f-9d64-183745659cbf.byteprivatelink.com",
+            "server_port": 443,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "transport": {
+                "type": "grpc",
+                "service_name": "12306"
+            },
+            "tls": {
+                "enabled": true,
+                "server_name": "www.12306.cn",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "香港3",
+            "server": "hk03.653ebeeb-5f60-4be5-958d-7bf4839cdccd.ef6616fd-5b06-482f-9d64-183745659cbf.byteprivatelink.com",
+            "server_port": 443,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "transport": {
+                "type": "grpc",
+                "service_name": "12306"
+            },
+            "tls": {
+                "enabled": true,
+                "server_name": "www.12306.cn",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "香港4",
+            "server": "d17591a2-1bc3-4f4a-81bc-5e914c7baa51.a2fe7180-832b-4e77-a778-c56eb22e1129.614df437-2ddd-48e6-b22d-87173a714836.smartprivatelink.com",
+            "server_port": 443,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "transport": {
+                "type": "grpc",
+                "service_name": "12306"
+            },
+            "tls": {
+                "enabled": true,
+                "server_name": "www.12306.cn",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "香港6",
+            "server": "120.232.217.202",
+            "server_port": 50000,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "美国1",
+            "server": "120.232.217.202",
+            "server_port": 20000,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "美国2",
+            "server": "120.232.217.148",
+            "server_port": 30000,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "trojan",
+            "tag": "美国3",
+            "server": "120.232.217.202",
+            "server_port": 10000,
+            "password": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "tls": {
+                "enabled": true,
+                "server_name": "www.312902.com",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "新加坡1",
+            "server": "sg01.653ebeeb-5f60-4be5-958d-7bf4839cdccd.ef6616fd-5b06-482f-9d64-183745659cbf.byteprivatelink.com",
+            "server_port": 443,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "transport": {
+                "type": "grpc",
+                "service_name": "12306"
+            },
+            "tls": {
+                "enabled": true,
+                "server_name": "www.12306.cn",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "新加坡2",
+            "server": "sg02.653ebeeb-5f60-4be5-958d-7bf4839cdccd.ef6616fd-5b06-482f-9d64-183745659cbf.byteprivatelink.com",
+            "server_port": 443,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "transport": {
+                "type": "grpc",
+                "service_name": "12306"
+            },
+            "tls": {
+                "enabled": true,
+                "server_name": "www.12306.cn",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "新加坡3",
+            "server": "sg03.653ebeeb-5f60-4be5-958d-7bf4839cdccd.ef6616fd-5b06-482f-9d64-183745659cbf.byteprivatelink.com",
+            "server_port": 443,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "transport": {
+                "type": "grpc",
+                "service_name": "12306"
+            },
+            "tls": {
+                "enabled": true,
+                "server_name": "www.12306.cn",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "日本1",
+            "server": "jp01.653ebeeb-5f60-4be5-958d-7bf4839cdccd.ef6616fd-5b06-482f-9d64-183745659cbf.byteprivatelink.com",
+            "server_port": 443,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "transport": {
+                "type": "grpc",
+                "service_name": "12306"
+            },
+            "tls": {
+                "enabled": true,
+                "server_name": "www.12306.cn",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vmess",
+            "tag": "日本3",
+            "server": "b3b79a78-7956-4ce5-b68d-4b3ab27dc219.6e4adf81-ee8f-427f-ae02-3ef80d0b5ac2.c35531f1-5881-4e5b-9adc-2b6822d57186.smartprivatelink.com",
+            "server_port": 443,
+            "uuid": "5d0e3ceb-0f87-4a0b-8919-d60c2d030335",
+            "alter_id": 0,
+            "security": "auto",
+            "transport": {
+                "type": "grpc",
+                "service_name": "douyin"
+            },
+            "tls": {
+                "enabled": true,
+                "server_name": "www.douyin.com",
+                "insecure": false
+            },
+            "network": "tcp",
+            "tcp_fast_open": false
+        },
+        {
+            "type": "vless",
+            "tag": "1",
+            "server": "us1.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server27.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "pse5tgjou9de5p6h079j"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "2",
+            "server": "hk2.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server29.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "ios"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "egdrlgeiuor9843t"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "3",
+            "server": "us7.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server31.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "ios"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "pweo5ty89hinsgdiulo"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "4",
+            "server": "us8.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server38.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "firefox"
+                }
+            },
+            "transport": {
+                "type": "ws",
+                "path": "\/se4tg9o8yti?ed=2560",
+                "headers": {
+                    "Host": [
+                        "server38.998877.best"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "5",
+            "server": "us6.998998.best",
+            "server_port": 8443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server39.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "transport": {
+                "type": "ws",
+                "path": "\/drtgoiuy\/fd?ed=2560",
+                "headers": {
+                    "Host": [
+                        "server39.998877.best"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "6",
+            "server": "uk1.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server46.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "qq"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "lsiadrughkhrt"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "7",
+            "server": "uk2.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server50.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "ios"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "ersgalkjdhgoin"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "8",
+            "server": "us17.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server52.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "firefox"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "pserhgiousfh"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "9",
+            "server": "us20.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "us-west1.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "firefox"
+                }
+            },
+            "transport": {
+                "type": "ws",
+                "path": "\/sertht?ed=2560",
+                "headers": {
+                    "Host": [
+                        "us-west1.998877.best"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "10",
+            "server": "uk5.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "nl1.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "ios"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "serphiogserhui"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "11",
+            "server": "us23.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "us3.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "chrome"
+                }
+            },
+            "transport": {
+                "type": "grpc",
+                "service_name": "sreipsthpi"
+            }
+        },
+        {
+            "type": "vless",
+            "tag": "12",
+            "server": "uk3.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "packet_encoding": "xudp",
+            "flow": "",
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "serveres1.998877.best",
+                "utls": {
+                    "enabled": true,
+                    "fingerprint": "qq"
+                }
+            },
+            "transport": {
+                "type": "ws",
+                "path": "\/sledrgt5ikn8hy?ed=2560",
+                "headers": {
+                    "Host": [
+                        "serveres1.998877.best"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            }
+        },
+        {
+            "tag": "13",
+            "type": "vmess",
+            "server": "us16.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "security": "auto",
+            "alter_id": 0,
+            "transport": {
+                "type": "ws",
+                "path": "\/rksdnuhgteb?ed=2560",
+                "headers": {
+                    "Host": [
+                        "server9-3.998877.best"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            },
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server9-3.998877.best"
+            }
+        },
+        {
+            "tag": "14",
+            "type": "vmess",
+            "server": "us19.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "security": "auto",
+            "alter_id": 0,
+            "transport": {
+                "type": "ws",
+                "path": "\/setfdg\/sdfg\/sgi?ed=2560",
+                "headers": {
+                    "Host": [
+                        "server2.998877.best"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            },
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server2-1.998877.best"
+            }
+        },
+        {
+            "tag": "15",
+            "type": "vmess",
+            "server": "hk10.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "security": "auto",
+            "alter_id": 0,
+            "transport": {
+                "type": "grpc",
+                "service_name": "qpjrngoaeogj"
+            },
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server48.998877.best"
+            }
+        },
+        {
+            "tag": "16",
+            "type": "vmess",
+            "server": "eu9.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "security": "auto",
+            "alter_id": 0,
+            "transport": {
+                "type": "ws",
+                "path": "\/jsedr6deersed6h?ed=2560",
+                "headers": {
+                    "Host": [
+                        "server54-4.998877.best"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            },
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "server54-4.998877.best"
+            }
+        },
+        {
+            "tag": "17",
+            "type": "vmess",
+            "server": "us2.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "security": "auto",
+            "alter_id": 0,
+            "transport": {
+                "type": "ws",
+                "path": "\/e56yglr4i8j7nk?ed=2560",
+                "headers": {
+                    "Host": [
+                        "serverus1-1.998877.best"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            },
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "serverus1-1.998877.best"
+            }
+        },
+        {
+            "tag": "18",
+            "type": "vmess",
+            "server": "mix1.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "security": "auto",
+            "alter_id": 0,
+            "transport": {
+                "type": "ws",
+                "path": "\/wpmckfpajfng?ed=2560",
+                "headers": {
+                    "Host": [
+                        "jp1-2.zfork.com"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            },
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "jp1-2.zfork.com"
+            }
+        },
+        {
+            "tag": "19",
+            "type": "vmess",
+            "server": "us24.998998.best",
+            "server_port": 443,
+            "uuid": "7b22de22-7d38-4c56-b0fe-ad8dd8498664",
+            "security": "auto",
+            "alter_id": 0,
+            "transport": {
+                "type": "ws",
+                "path": "\/etorpdhdow36gehnyue?ed=2560",
+                "headers": {
+                    "Host": [
+                        "ar1-3.zfork.com"
+                    ]
+                },
+                "max_early_data": 2560,
+                "early_data_header_name": "Sec-WebSocket-Protocol"
+            },
+            "tls": {
+                "enabled": true,
+                "insecure": true,
+                "server_name": "ar1-3.zfork.com"
+            }
+        },
+        {
+            "type": "selector",
+            "tag": "节点选择",
+            "outbounds": [
+                "自动选择",
+                "direct",
+                "美国自动",
+                "香港自动",
+                "狮城自动",
+                "日本自动",
+                "香港1",
+                "香港2",
+                "香港3",
+                "香港4",
+                "香港6",
+                "美国1",
+                "美国2",
+                "美国3",
+                "新加坡1",
+                "新加坡2",
+                "新加坡3",
+                "日本1",
+                "日本3",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19"
+            ]
+        },
+        {
+            "type": "urltest",
+            "tag": "自动选择",
+            "outbounds": [
+                "香港1",
+                "香港2",
+                "香港3",
+                "香港4",
+                "香港6",
+                "美国1",
+                "美国2",
+                "美国3",
+                "新加坡1",
+                "新加坡2",
+                "新加坡3",
+                "日本1",
+                "日本3",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19"
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "5m",
+            "tolerance": 150
+        },
+        {
+            "type": "urltest",
+            "tag": "香港自动",
+            "outbounds": [
+                "香港1",
+                "香港2",
+                "香港3",
+                "香港4",
+                "香港6"
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "5m",
+            "tolerance": 150
+        },
+        {
+            "type": "urltest",
+            "tag": "日本自动",
+            "outbounds": [
+                "日本1",
+                "日本3"
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "5m",
+            "tolerance": 150
+        },
+        {
+            "type": "urltest",
+            "tag": "美国自动",
+            "outbounds": [
+                "美国1",
+                "美国2",
+                "美国3"
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "5m",
+            "tolerance": 200
+        },
+        {
+            "type": "urltest",
+            "tag": "狮城自动",
+            "outbounds": [
+                "新加坡1",
+                "新加坡2",
+                "新加坡3"
+            ],
+            "url": "http://www.gstatic.com/generate_204",
+            "interval": "5m",
+            "tolerance": 150
+        },
+        {"type": "selector",
+            "tag": "final",
+            "outbounds": [
+                "direct",
+                "自动选择",
+                "节点选择"
+
+            ]}
+    ],
+    "route": {
+        "rules": [
+            {
+                "action": "sniff"
+            },
+            {
+                "protocol": "dns",
+                "action": "hijack-dns"
+            },
+            {
+                "rule_set": [
+                    "geoip-cn"
+                ],
+                "outbound": "direct"
+            },
+            {
+                "rule_set": [
+                    "geosite-gfw"
+                ],
+                "outbound": "节点选择"
+            },
+            {
+                "rule_set": "geosite-category-ads-all",
+                "action": "reject"
+            },
+            {
+                "domain_keyword":[
+                    "annas-archive"
+                ],
+                "outbound":"香港自动"
+            }
+        ],
+        "rule_set": [
+            {
+                "tag": "geoip-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+                "download_detour": "8"
+            },
+            {
+                "tag": "geosite-gfw",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/sing/geo/geosite/gfw.srs",
+                "download_detour": "8"
+            },
+            {
+                "tag": "geosite-category-ads-all",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
+                "download_detour": "8"
+            }
+        ],
+        "auto_detect_interface": true,
+        "final": "final"
+    }
+}
