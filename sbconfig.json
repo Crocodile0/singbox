@@ -31,17 +31,26 @@
                 "disable_cache": true
             },
             {
-                "rule_set": "geosite-category-ads-all",
-                "server": "block"
-            },
-            {
                 "rule_set": "geoip-cn",
                 "action": "route",
                 "server": "alidns"
             },
             {
                 "rule_set": [
-                    "geosite-gfw"
+                    "geosite-chat",
+                    "geosite-youtube",
+                    "geosite-google",
+                    "geosite-github",
+                    "geosite-telegram",
+                    "geosite-tiktok",
+                    "geosite-netflix",
+                    "geosite-apple",
+                    "geosite-microsoft",
+                    "geosite-onedrive",
+                    "geosite-geolocation-!cn",
+                    "geoip-google",
+                    "geoip-telegram",
+                    "geoip-netflix",
                 ],
                 "server": "google"
             }
