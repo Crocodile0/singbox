@@ -42,12 +42,6 @@
                     "server_port": 2080
                 }
             }
-        },
-        {
-            "type": "mixed",
-            "tag": "in",
-            "listen": "127.0.0.1",
-            "listen_port": 2080
         }
     ],
     "outbounds": [
@@ -892,7 +886,7 @@
                 "action": "hijack-dns"
             },
             {
-                "inbound": "in",
+                "inbound": "tun-in",
                 "action": "sniff"
             },
             {"rule_set": "geosite-private", "outbound": "direct"},
