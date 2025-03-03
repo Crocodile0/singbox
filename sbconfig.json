@@ -35,7 +35,7 @@
             "address": "172.19.0.1/30",
             "auto_route": true,
             "strict_route": true,
-            "stack": "gvisor",
+            "stack": "mixed",
             "platform": {
                 "http_proxy": {
                     "enabled": true,
@@ -43,7 +43,14 @@
                     "server_port": 2080
                 }
             }
-        }
+        },
+        {
+            "type": "mixed",
+            "tag": "in"
+            "listen": "127.0.0.1",
+            "listen_port": 2080,
+            "users": []
+  }
     ],
     "outbounds": [
         {
@@ -887,7 +894,7 @@
                 "action": "hijack-dns"
             },
             {
-                "inbound": "tun-in",
+                "inbound": "in",
                 "action": "sniff"
             },
             {"rule_set": "geosite-private", "outbound": "direct"},
