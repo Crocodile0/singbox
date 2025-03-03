@@ -45,10 +45,9 @@
         },
         {
             "type": "mixed",
+            "tag": "in",
             "listen": "127.0.0.1",
-            "listen_port": 2080,
-            "sniff": true,
-            "users": []
+            "listen_port": 2080
         }
     ],
     "outbounds": [
@@ -889,6 +888,12 @@
     "route": {
         "rules": [
             {
+                "inbound": "in",
+                "action": "resolve",
+                "strategy": "prefer_ipv4"
+            },
+            {
+                "inbound": "in",
                 "action": "sniff"
             },
             {
