@@ -34,14 +34,14 @@
             },
             {
                 "rule_set": "geosite-geolocation-!cn",
-                "server": "fakeip"
+                "server": "dns_proxy"
             }
         ],
         "fakeip": {
-            "enable": true,
+            "enabled": true,
             "inet4_range": "198.18.0.0/15",
         },
-        "final": "fakeip",
+        "final": "dns_proxy",
         "strategy": "ipv4_only"
     },
     "inbounds": [
