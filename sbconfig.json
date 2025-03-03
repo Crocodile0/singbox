@@ -8,51 +8,32 @@
     "dns": {
         "servers": [
             {
-                "tag": "google",
-                "address": "tls://8.8.8.8",
-                "address_strategy": "ipv4_only",
-                "detour": "节点选择"
-            },
-            {
-                "tag": "alidns",
+                "tag": "dns_direct",
                 "address": "223.5.5.5",
                 "address_strategy": "ipv4_only",
                 "detour": "direct"
             },
             {
-                "tag": "block",
-                "address": "rcode://success"
+                "tag": "dns_proxy",
+                "address": "tls://8.8.8.8",
+                "address_strategy": "ipv4_only",
+                "detour": "自动选择"
             }
         ],
         "rules": [
             {
                 "outbound": "any",
-                "server": "alidns",
+                "server": "dns_direct",
                 "disable_cache": true
             },
             {
-                "rule_set": "geoip-cn",
+                "rule_set": "geosite-cn",
                 "action": "route",
-                "server": "alidns"
+                "server": "dns_direct"
             },
             {
-                "rule_set": [
-                    "geosite-chat",
-                    "geosite-youtube",
-                    "geosite-google",
-                    "geosite-github",
-                    "geosite-telegram",
-                    "geosite-tiktok",
-                    "geosite-netflix",
-                    "geosite-apple",
-                    "geosite-microsoft",
-                    "geosite-onedrive",
-                    "geosite-geolocation-!cn",
-                    "geoip-google",
-                    "geoip-telegram",
-                    "geoip-netflix"
-                ],
-                "server": "google"
+                "rule_set": "geosite-geolocation-!cn",
+                "server": "dns_proxy"
             }
         ],
         "final": "google",
