@@ -5,15 +5,6 @@
         "output": "box.log",
         "timestamp": true
     },
-    "experimental": {
-        "clash_api": {
-            "external_controller": "127.0.0.1:9090",
-            "external_ui": "/etc/sing-box/ui",
-            "secret": "",
-            "external_ui_download_detour": "8",
-            "default_mode": "rule"
-        }
-    },
     "dns": {
         "servers": [
             {
@@ -45,18 +36,10 @@
                 "rule_set": "geosite-geolocation-!cn",
                 "server": "fakeip"
             },
-            {
-                "query_type": [
-                    "A",
-                    "AAAA"
-                ],
-                "server": "fakeip"
-            }
         ],
         "fakeip": {
             "enable": true,
             "inet4_range": "198.18.0.0/15",
-            "inet6_range": "fc00::/18"
         },
         "final": "fakeip",
         "strategy": "ipv4_only"
