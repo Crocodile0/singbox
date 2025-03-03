@@ -16,7 +16,7 @@
         ],
         "rules": [
             {"rule_set": "geosite-cn", "action": "route","server": "dns_direct"},
-            {"rule_set": "geosite-geolocation-!cn", "server": "fakeip"}
+            {"rule_set": "geosite-geolocation-!cn", "server": "fakeip"},
             {
                 "query_type": [
                   "A",
@@ -52,7 +52,7 @@
         },
         {
             "type": "mixed",
-            "tag": "in"
+            "tag": "in",
             "listen": "127.0.0.1",
             "listen_port": 2080,
             "users": []
