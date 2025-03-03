@@ -888,17 +888,12 @@
     "route": {
         "rules": [
             {
-                "inbound": "in",
-                "action": "resolve",
-                "strategy": "prefer_ipv4"
+                "protocol": "dns",
+                "action": "hijack-dns"
             },
             {
                 "inbound": "in",
                 "action": "sniff"
-            },
-            {
-                "protocol": "dns",
-                "action": "hijack-dns"
             },
             {"rule_set": "geosite-private", "outbound": "direct"},
             {"rule_set": "geosite-chat", "outbound": "美国自动"},
