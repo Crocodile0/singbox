@@ -50,7 +50,7 @@
                     "geosite-geolocation-!cn",
                     "geoip-google",
                     "geoip-telegram",
-                    "geoip-netflix",
+                    "geoip-netflix"
                 ],
                 "server": "google"
             }
